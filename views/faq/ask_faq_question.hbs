@@ -1,0 +1,23 @@
+<h1>Ask questions</h1>
+
+{{#if errors.length}}
+    <p>Couldn't add a question due to:</p>
+    <ul>
+        {{#each errors}}
+            <li>{{this}}</li>
+        {{/each}}
+    </ul>
+{{/if}}
+
+<form action="/faq/{{question.id}}/update" method="POST">
+    <div>
+        Name: <input type="text" name="name" value="{{question.question}}">
+    </div>
+    <div>
+        Description:<br>
+        <textarea name="description">{{product.answer}}</textarea>
+    </div>
+    <div>
+        <input type="submit" value="Update">
+    </div>
+</form>

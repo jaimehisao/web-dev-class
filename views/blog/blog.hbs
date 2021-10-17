@@ -1,0 +1,32 @@
+<h2>Hisao's Blog Posts</h2>
+
+
+{{#if session.isLoggedIn}}
+    <a href="/blog/create">Create new blog post!</a>
+    <a href="/blog/delete">Delete an existing blog post!</a>
+    <a href="/blog/update">Update an existing blog post!</a>
+{{/if}}
+
+
+{{#if hasDatabaseError}}
+    <p>Couldn't fetch the blog posts at the moment, try again later.</p>
+{{else}}
+
+    {{#if blog.length}}
+        <ul>
+            {{#each blog}}
+                <div class="card" style="width: 18rem;">
+                    <div class="card-body">
+                        <h5 class="card-title">{{title}}</h5>
+                        <p class="card-text">{{post}}</p>
+                    </div>
+                </div>
+            {{/each}}
+        </ul>
+    {{else}}
+        <p>No blog posts exist.</p>
+    {{/if}}
+
+{{/if}}
+
+

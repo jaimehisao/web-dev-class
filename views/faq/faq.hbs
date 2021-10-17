@@ -1,0 +1,15 @@
+<h2>Hisao's FAQ's</h2>
+{{#if faq.length}}
+    <ul>
+        {{#each faq}}
+            <li>{{question}}</li>
+            <li>{{answer}}</li>
+        {{/each}}
+        {{#if session.isLoggedIn}}
+            <a href="/faq/{{faq.id}}/update">Respond Question</a>
+            <a href="/faq/{{answer.id}}/delete">Delete</a>
+        {{/if}}
+    </ul>
+{{else}}
+    <p>No questions have been asked.</p>
+{{/if}}

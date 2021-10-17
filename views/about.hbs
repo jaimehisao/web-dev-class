@@ -1,10 +1,54 @@
-<h2>About Hisao</h2>
-{{#if humans.length}}
+<h3>About Hisao</h3>
+
+<h4>Basics</h4>
+<p>Born in Monterrey, México in 1999. Studied highschool and bachelors at Técnologico de Monterrey. Currently doing
+an exchange program in Jönköping University in Sweden. I'm passionate about everything tech, especially automation and
+everything that happens server side. I'm almost graduating from my bachelors and I've interned twice at Google (remotely
+due to COVID-19) and I'm due to go again this summer.</p>
+
+<h4>Work Experience</h4>
+<table border="1">
+    <thead>
+    <tr>
+        <th>Company</th>
+        <th>Role</th>
+        <th>Accomplishments</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td>Google</td>
+        <td>Software Engineering Intern 2021</td>
+        <td>Iterated on an existing Open Source Project, fixed existing bugs that increased the efficiency of the
+        parsing subsystem. Added automated testing to code repository to provide automated CI/CD, allowing developers
+        to focus on what's important.
+        </td>
+    </tr>
+    <tr>
+        <td>Google</td>
+        <td>STEP Intern 2020</td>
+        <td>Created a search engine that provides users with detailed driving laws and regulations, in case they're
+            involved in an accident or need to quickly browese the law. All this from a simple, sleek mobile phone interface
+            with results that are updated everytime the law changes, automatically using a home made parsing system.
+        </td>
+    </tr>
+    <tr>
+        <td>Sigma Alimentos</td>
+        <td>IT Intern</td>
+        <td>Designed a plan to implement IoT inside Sigma's new headquarters, to automate their needs
+            and reduce energy consumption substantialy. As per the plan, AC, office lights and mobile delivery trucks
+            would be interconnected to stay in sync and also not spend more energy to cool an empty office, for example.
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+{{#if facts.length}}
     <ul>
-        {{#each humans}}
-            <li>{{name}}</li>
+        {{#each fact}}
+            <li>{{fact}}</li>
         {{/each}}
     </ul>
 {{else}}
-    <p>No humans exist.</p>
+    <p>No facts exist.</p>
 {{/if}}

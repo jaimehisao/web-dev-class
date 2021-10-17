@@ -1,0 +1,23 @@
+<h1>Update Blog Post</h1>
+
+{{#if errors.length}}
+    <p>Couldn't update the blog post because:</p>
+    <ul>
+        {{#each errors}}
+            <li>{{this}}</li>
+        {{/each}}
+    </ul>
+{{/if}}
+
+<form action="/blog/{{blog.id}}/update" method="POST">
+    <div>
+        ID of blog post : <input type="text" name="name" value="{{blog.name}}">
+    </div>
+    <div>
+        Description:<br>
+        <textarea name="description">{{blog.text}}</textarea>
+    </div>
+    <div>
+        <input type="submit" value="Update">
+    </div>
+</form>
