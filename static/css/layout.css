@@ -3,7 +3,7 @@
 	body{
 		display: grid;
 		grid-template-rows: auto auto auto;
-		grid-template-columns: 200px 1fr;
+		grid-template-columns: 0px 1fr;
 		max-width: 1000px;
 		margin: 0 auto;
 		padding: 8px;
@@ -14,12 +14,18 @@
 		grid-column: 1 / span 2;
 	}
 
-	nav{
-		grid-row: 2 / span 1;
-		grid-column: 1 / span 1;
-		border-right: 3px solid black;
-		border-bottom: none;
+	button{
+		margin: 0 auto;
+		padding: 10px;
 	}
+
+	input{
+		margin: 0 auto;
+		padding: 10px;
+	}
+
+
+
 
 	main{
 		grid-row: 2 / span 1;
@@ -52,8 +58,7 @@ header{
 	text-decoration: underline;
 }
 
-nav{
-}
+
 
 main{
 	padding: 4px;
@@ -65,28 +70,26 @@ footer{
 }
 
 /* To style the menu. */
-nav ul{
-	list-style-type: none;
-	padding: 5px;
-	margin: 0;
+
+
+
+/*
+* BOOTSTRAP
+ */
+.card {
+	box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+	transition: 0.3s;
+	border-radius: 5px; /* 5px rounded corners */
 }
 
-nav ul li{
-	margin-bottom: 5px;
-	text-align: center;
+/* On mouse-over, add a deeper shadow */
+.card:hover {
+	box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
 }
 
-nav ul li:last-child{
-	margin-bottom: 0;
+/* Add some padding inside the card container */
+.container {
+	padding: 2px 16px;
 }
 
-nav ul li a{
-	background-color: silver;
-	display: block;
-	text-decoration: none;
-	color: black;
-}
 
-nav ul li a:hover{
-	background-color: gray;
-}
