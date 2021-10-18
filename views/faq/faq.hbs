@@ -1,25 +1,39 @@
 <h2>Hisao's FAQ's</h2>
 <a href="/faqs/ask" class="btn btn-primary">Ask a Question</a>
-{{#if faq.length}}
-    <ul>
-        {{#each faq}}
-        <div class="card">
-            <div class="container">
-            <h4>{{name}}</h4>
-            <h4>{{question}}</h4>
-            <h4>{{questionResponse}}</h4>
-                <br>
-                <a href="/faqs/{{id}}/respond">Respond</a>
-                <a href="/faqs/{{id}}/delete">Delete</a>
-            {{#if session.isLoggedIn}}
-                <br>
-                <a href="/faqs/{{id}}/respond">Respond</a>
-                <a href="/faqs/{{id}}/delete">Delete</a>
-            {{/if}}
-            </div>
-        </div>
-        {{/each}}
-    </ul>
+{{#if session.isLoggedIn}}
+    {{#if faq.length}}
+        <ul>
+            {{#each faq}}
+                <div class="card" style="width: auto">
+                    <div class="container">
+                        <h5 class="card-title">{{name}}</h5>
+                        <h6 class="card-text">{{question}}</h6>
+                        <h4 class="card-text">{{questionResponse}}</h4>
+                        <br>
+                        <a href="/faqs/{{id}}/respond">Respond</a>
+                        <a href="/faqs/{{id}}/delete">Delete</a>
+                    </div>
+                </div>
+            {{/each}}
+        </ul>
+    {{else}}
+        <p>No questions have been asked.</p>
+    {{/if}}
 {{else}}
-    <p>No questions have been asked.</p>
+    {{#if faq.length}}
+        <ul>
+            {{#each faq}}
+                <div class="card">
+                    <div class="container">
+                        <h5 class="card-title">{{name}}</h5>
+                        <h6 class="card-text">{{question}}</h6>
+                        <h4 class="card-text">{{questionResponse}}</h4>
+                        <br>
+                    </div>
+                </div>
+            {{/each}}
+        </ul>
+    {{else}}
+        <p>No questions have been asked.</p>
+    {{/if}}
 {{/if}}

@@ -1,7 +1,9 @@
 <h2>Hisao's Blog Posts</h2>
 
 {{#if hasDatabaseError}}
-    <p>Couldn't fetch the blog posts at the moment, try again later.</p>
+    <div class="alert alert-primary" role="alert">
+        Couldn't fetch the blog posts at the moment, try again later.
+    </div>
 {{else}}
 
     {{#if session.isLoggedIn}}
@@ -9,10 +11,11 @@
         {{#if blog.length}}
             <ul>
                 {{#each blog}}
-                    <div class="card" style="width: 18rem;">
+                    <div class="card" style="width: auto">
                         <div class="card-body">
-                            <h5 class="card-title">{{title}}</h5>
-                            <p class="card-text">{{post}}</p>
+                            <h4 class="card-title">{{title}}</h4>
+                            <h6 class="card-text">Created at: {{date}}</h6>
+                            <p class="card-text">{{textEntry}}</p>
                             <br>
                             <a href="/blog/{{id}}/update">Update</a>
                             <a href="/blog/{{id}}/delete">Delete</a>
@@ -29,8 +32,9 @@
                 {{#each blog}}
                     <div class="card" style="width: 18rem;">
                         <div class="card-body">
-                            <h5 class="card-title">{{title}}</h5>
-                            <p class="card-text">{{post}}</p>
+                            <h4 class="card-title">{{title}}</h4>
+                            <h6 class="card-title">Created at: {{date}}</h6>
+                            <p class="card-text">{{textEntry}}</p>
                         </div>
                     </div>
                 {{/each}}

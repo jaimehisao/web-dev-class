@@ -1,12 +1,13 @@
 <h1>Update Blog Post</h1>
-
 {{#if errors.length}}
+<div class="alert alert-danger" role="alert">
     <p>Couldn't update the blog post because:</p>
     <ul>
         {{#each errors}}
             <li>{{this}}</li>
         {{/each}}
     </ul>
+</div>
 {{/if}}
 
 <form action="/blog/{{id}}/update" method="POST">

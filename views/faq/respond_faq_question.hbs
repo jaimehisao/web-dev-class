@@ -1,12 +1,14 @@
 <h1>Respond to Question</h1>
 
 {{#if errors.length}}
-    <p>Couldn't respond to the question due to:</p>
-    <ul>
-        {{#each errors}}
-            <li>{{this}}</li>
-        {{/each}}
-    </ul>
+    <div class="alert alert-primary" role="alert">
+        <p>Couldn't respond to the question due to:</p>
+        <ul>
+            {{#each errors}}
+                <li>{{this}}</li>
+            {{/each}}
+        </ul>
+    </div>
 {{/if}}
 
 <form action="/faqs/{{id}}/respond" method="POST">

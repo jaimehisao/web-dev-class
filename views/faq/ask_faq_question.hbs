@@ -1,12 +1,16 @@
 <h1>Ask questions</h1>
 
+
 {{#if errors.length}}
+    <div class="alert alert-primary" role="alert">
+        Couldn't fetch the blog posts at the moment, try again later.
     <p>Couldn't add a question due to:</p>
     <ul>
         {{#each errors}}
             <li>{{this}}</li>
         {{/each}}
     </ul>
+    </div>
 {{/if}}
 
 <form action="/faqs/ask" method="POST">
@@ -18,6 +22,6 @@
         <textarea name="question" class="form-control"></textarea>
     </div>
     <div>
-        <input type="submit" value="Update" class="btn btn-primary">
+        <input type="submit" value="Submit" class="btn btn-primary">
     </div>
 </form>
