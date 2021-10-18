@@ -9,15 +9,15 @@
     </ul>
 {{/if}}
 
-<form action="/faq/{{question.id}}/update" method="POST">
+<form action="/faqs/ask" method="POST">
     <div>
-        Name: <input type="text" name="name" value="{{question.question}}">
+        Your Name: <input type="text" name="name" class="form-control">
     </div>
     <div>
-        Description:<br>
-        <textarea name="description">{{product.answer}}</textarea>
+        Question to ask:<br>
+        <textarea name="question" class="form-control"></textarea>
     </div>
     <div>
-        <input type="submit" value="Update">
+        <input type="submit" value="Update" class="btn btn-primary">
     </div>
 </form>

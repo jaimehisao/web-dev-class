@@ -1,5 +1,6 @@
 <h1>Delete FAQ Entry</h1>
-<p>Are you sure you want to delete {{question.question}}? This action cannot be reversed.</p>
-<form action="/products/{{quesion.id}}/delete" method="post">
+<p>Are you sure you want to delete {{faq.question}}? This action cannot be reversed.</p>
+<form action="/faqs/{{faq.id}}/delete" method="post">
     <input type="submit" value="I'm sure!">
+    <a href="/faqs">Cancel</a> <!--TODO add button attributes-->
 </form>

@@ -1,0 +1,24 @@
+<h1>Respond to Question</h1>
+
+{{#if errors.length}}
+    <p>Couldn't respond to the question due to:</p>
+    <ul>
+        {{#each errors}}
+            <li>{{this}}</li>
+        {{/each}}
+    </ul>
+{{/if}}
+
+<form action="/faqs/{{id}}/respond" method="POST">
+    <div>
+        <p>Original Question</p>
+        <p>{{question}}</p>
+    </div>
+    <div>
+        Response:<br>
+        <textarea name="questionResponse" class="form-control"></textarea>
+    </div>
+    <div>
+        <input type="submit" value="Answer" class="btn btn-primary">
+    </div>
+</form>

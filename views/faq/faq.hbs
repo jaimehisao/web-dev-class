@@ -1,14 +1,24 @@
 <h2>Hisao's FAQ's</h2>
+<a href="/faqs/ask" class="btn btn-primary">Ask a Question</a>
 {{#if faq.length}}
     <ul>
         {{#each faq}}
-            <li>{{question}}</li>
-            <li>{{answer}}</li>
+        <div class="card">
+            <div class="container">
+            <h4>{{name}}</h4>
+            <h4>{{question}}</h4>
+            <h4>{{questionResponse}}</h4>
+                <br>
+                <a href="/faqs/{{id}}/respond">Respond</a>
+                <a href="/faqs/{{id}}/delete">Delete</a>
+            {{#if session.isLoggedIn}}
+                <br>
+                <a href="/faqs/{{id}}/respond">Respond</a>
+                <a href="/faqs/{{id}}/delete">Delete</a>
+            {{/if}}
+            </div>
+        </div>
         {{/each}}
-        {{#if session.isLoggedIn}}
-            <a href="/faq/{{faq.id}}/update">Respond Question</a>
-            <a href="/faq/{{answer.id}}/delete">Delete</a>
-        {{/if}}
     </ul>
 {{else}}
     <p>No questions have been asked.</p>

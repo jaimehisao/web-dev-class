@@ -9,15 +9,14 @@
     </ul>
 {{/if}}
 
-<form action="/blog/{{blog.id}}/update" method="POST">
+<form action="/blog/{{id}}/update" method="POST">
     <div>
-        ID of blog post : <input type="text" name="name" value="{{blog.name}}">
+        <label for="comment">Update Title:</label>
+        <textarea name="title" class="form-control">{{text}}</textarea><br>
+        <label for="comment">Update post:</label>
+        <textarea name="textEntry" rows="3" class="form-control" >{{text}}</textarea>
     </div>
     <div>
-        Description:<br>
-        <textarea name="description">{{blog.text}}</textarea>
-    </div>
-    <div>
-        <input type="submit" value="Update">
+        <input type="submit" value="Update" class="btn btn-primary">
     </div>
 </form>
