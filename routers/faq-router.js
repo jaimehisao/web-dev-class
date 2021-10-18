@@ -34,9 +34,7 @@ router.post('/ask', function(request, response){
     // TODO VALIDATION OF INPUTED TEXT
     //const errors = validators.getValidationErrorsForProduct(title, textBody)
     let errors = []
-    if(!request.session.isLoggedIn){
-        errors.push("Not logged in.")
-    }
+
 
     if(errors.length === 0){
         db.createFaqQuestion(name, question, function(error, faqId){
