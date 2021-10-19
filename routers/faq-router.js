@@ -76,7 +76,8 @@ router.post('/:id/respond', function(request, response){
 
     // TODO VALIDATIONS WHEN SUBMITTING A QUESTION
     const questionResponse = request.body.questionResponse
-    const id = request.header.id
+    const id = request.params.id
+    console.log(id)
     // TODO VALIDATION OF INPUTED TEXT
     //const errors = validators.getValidationErrorsForProduct(title, textBody)
 
@@ -86,13 +87,13 @@ router.post('/:id/respond', function(request, response){
         errors.push("Not logged in.")
     }
 
-    const originalQuestion = db.getBlogPostById(id, function (error){
+    const originalQuestion = db.getFaqsById(id, function (error){
         errors.concat(error)
         if(errors.length === 0){
             db.answerFAQ(id, questionResponse, function(error){
                 if(error){
                     errors.push("Internal server error.")
-                    //console.log(error)
+                    console.log(error)
                     const model = {
                         errors,
                         id,
