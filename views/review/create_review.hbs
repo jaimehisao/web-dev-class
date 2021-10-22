@@ -1,0 +1,45 @@
+<h1>Create Review</h1>
+In this page you can create a review of whatever you want, you can also review Hisao, the owner of the page, and give
+references about him and his work.
+
+{{#if errors.length}}
+    <div class="alert alert-primary" role="alert">
+        Couldn't fetch the blog posts at the moment, try again later.
+        <p>Couldn't create the blog post because:</p>
+        <ul>
+            {{#each errors}}
+                <li>{{this}}</li>
+            {{/each}}
+        </ul>
+    </div>
+{{/if}}
+
+<form action="/reviews/create" method="POST">
+    <div>
+        Review Title:
+        <input type="text" name="title" class="form-control">
+    </div>
+    <div>
+        Posted by:
+        <input type="text" name="postedBy" class="form-control">
+    </div>
+    <br>
+    <div>
+        Score:
+        <select name = "score">
+            <option value = "1" selected>1</option>
+            <option value = "2">2</option>
+            <option value = "3">3</option>
+            <option value = "4">4</option>
+            <option value = "5">5</option>
+        </select>
+    </div>
+    <div>
+        Review Text:<br>
+        <textarea name="review" class="form-control"></textarea>
+    </div>
+
+    <div>
+        <input type="submit" value="Create" class="btn btn-primary">
+    </div>
+</form>

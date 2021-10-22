@@ -1,0 +1,27 @@
+<h2>Hisao's Reviews</h2>
+
+{{#if hasDatabaseError}}
+    <div class="alert alert-primary" role="alert">
+        Couldn't fetch the blog posts at the moment, try again later.
+    </div>
+{{else}}
+
+<a href="/reviews/create" class="btn btn-primary">Submit a Review</a>
+{{#if reviews.length}}
+    <ul>
+        {{#each reviews}}
+            <div class="card" style="width: auto">
+                <div class="container">
+                    <h5 class="card-title">{{title}}</h5>
+                    <h6 class="card-text">{{author}}</h6>
+                    <h4 class="card-text">{{review}}</h4>
+                    <h4 class="card-text">{{score}}</h4>
+                    <br>
+                </div>
+            </div>
+        {{/each}}
+    </ul>
+{{else}}
+    <p>No questions have been asked.</p>
+{{/if}}
+{{/if}}
