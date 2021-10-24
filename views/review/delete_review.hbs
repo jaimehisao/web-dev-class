@@ -1,0 +1,5 @@
+<h1>Delete Review Entry</h1>
+<p>Are you sure you want to delete the entry named {{review.title}}?</p>
+<form action="/reviews/{{review.id}}/delete" method="post">
+    <input type="submit" value="Delete!" class="btn btn-primary">
+</form>

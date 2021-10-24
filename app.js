@@ -10,11 +10,11 @@ const expressSession = require('express-session')
 const blogRouter = require('./routers/blog-router')
 const authRouter = require('./routers/auth-router')
 const faqRouter = require('./routers/faq-router')
+const reviewRouter = require('./routers/review-router')
 
 // DATABASE DECLARATIONS SQLITE //
 const connectSqlite3 = require('connect-sqlite3')
 const sessions_db = new sqlite.Database('hisao-sessions.db')
-
 const SQLiteStore = connectSqlite3(expressSession)
 database.runInitializing()
 // CONSTANTS //
@@ -53,6 +53,7 @@ app.use(function(request, response, next){
 app.use('/auth', authRouter)
 app.use('/blog', blogRouter)
 app.use('/faqs', faqRouter)
+app.use('/reviews', reviewRouter)
 
 /*
 app.use(function(request, response, next)){

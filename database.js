@@ -13,7 +13,7 @@ exports.runInitializing = function (){
 		textEntry TEXT,
 		date TEXT
 	)
-`)
+    `)
 
     db.run(`
 	CREATE TABLE IF NOT EXISTS faqs (
@@ -24,7 +24,17 @@ exports.runInitializing = function (){
 		dateOfQuestion TEXT,
 		dateOfResponse TEXT
 	)
-`)
+    `)
+    db.run(`
+    CREATE TABLE IF NOT EXISTS reviews(
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        title TEXT,
+        author TEXT,
+        review TEXT,
+        date TEXT,
+        score INTEGER
+        )
+        `)
 }
 // END OF TABLE CREATION SECTION //
 
@@ -136,4 +146,49 @@ exports.deleteFaq = function(id, callback){
         callback(error)
     })
 
+}
+
+// REVIEW SECTION //
+exports.createReview = function (title, author, review, score, date, callback){
+    const query = "INSERT INTO reviews (title, author, review, score, date) VALUES (?, ?, ?, ?, ?)"
+    const values = [title, author, review, score, date]
+
+    db.run(query, values, function(error){
+        //console.log(error)
+        callback(error, this.lastID)
+    })
+}
+
+exports.deleteReview = function (id, callback){
+    const query = "DELETE FROM reviews WHERE id = ?"
+    const values = [id]
+
+    db.run(query, values, function(error){
+        callback(error)
+    })
+}
+
+exports.updateReview = function(id, title, textEntry, author, score, callback){
+    const query = "UPDATE reviews SET title = ?, textEntry = ? WHERE id = ?"
+    const values = [title, textEntry, id]
+
+    db.run(query, values, function(error){
+        callback(error)
+    })
+}
+
+exports.getReviewById = function (id, callback){
+    const query = "SELECT * FROM reviews WHERE id = ? LIMIT 1"
+    const values = [id]
+
+    db.get(query, values, function(error, reviews){
+        callback(error, reviews)
+    })
+}
+
+exports.getAllReviews = function (callback){
+    const query = "SELECT * FROM reviews"
+    db.all(query, function(error, reviews){
+        callback(error, reviews)
+    })
 }
