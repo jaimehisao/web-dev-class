@@ -1,3 +1,8 @@
+{{#if errors}}
+    <div class="alert alert-primary" role="error">
+        Login failed! Try again with other credentials!
+    </div>
+{{/if}}
 <h1>Login</h1>
 <form action="/auth/login" method="POST">
     <div>
