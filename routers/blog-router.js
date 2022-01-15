@@ -95,6 +95,7 @@ router.get("/:id/update", csrfProtection, function (request, response) {
     const model = {
       id,
       blogPost,
+      csrfToken: request.csrfToken(),
     };
     response.render("blog/update_blog_post.hbs", model);
   });

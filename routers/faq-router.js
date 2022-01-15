@@ -104,6 +104,7 @@ router.post(
               errors,
               id,
               originalQuestion,
+              questionResponse,
             };
             response.render("faq/respond_faq_question.hbs", model);
           } else {
@@ -114,8 +115,9 @@ router.post(
         const model = {
           errors,
           originalQuestion,
+          questionResponse,
         };
-        response.render("faq/ask_faq_question.hbs", model);
+        response.render("faq/respond_faq_question.hbs", model);
       }
     });
   }

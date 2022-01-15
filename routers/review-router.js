@@ -42,6 +42,7 @@ router.post("/create", parseForm, csrfProtection, function (request, response) {
   const title = request.body.title;
   const textBody = request.body.review;
   const score = request.body.score;
+  const csrfToken = request.body.csrfToken;
   const dateTime = helpers.getCurrentTime();
   const errors = helpers.validateReview(title, textBody);
 
@@ -62,6 +63,7 @@ router.post("/create", parseForm, csrfProtection, function (request, response) {
             title,
             textBody,
             score,
+            csrfToken,
           };
           response.render("review/create_review.hbs", model);
         } else {
@@ -76,6 +78,7 @@ router.post("/create", parseForm, csrfProtection, function (request, response) {
       title,
       textBody,
       score,
+      csrfToken,
     };
     response.render("review/create_review.hbs", model);
   }
