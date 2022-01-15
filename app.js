@@ -1,6 +1,5 @@
 // NPM IMPORTS //
 const express = require('express')
-const sqlite = require('sqlite3')
 const database = require('./database')
 // EXPRESS PACKAGES //
 const expressHandlebars = require('express-handlebars')
