@@ -1,238 +1,210 @@
-const express = require('express')
-const db = require('../database')
-const router = express.Router()
+const express = require("express");
+const bodyParser = require("body-parser");
+const csrf = require("csurf");
+const cookieParser = require("cookie-parser");
+const db = require("../database");
+const helpers = require("../helpers");
+const router = express.Router();
 
-router.get('/', function(request, response){
-        db.getAllFaqs(function(error, faq){
-            if(error){
-                const model = {
-                    hasDatabaseError: true,
-                    faq: []
-                }
-                response.render('faq/faq.hbs', model)
-            }else{
-                const model = {
-                    hasDatabaseError: false,
-                    faq
-                }
-                //console.log(faq)
-                response.render('faq/faq.hbs', model)
-            }
-        })
-})
+// Setup for the CSRF protection middleware
+const csrfProtection = csrf({ cookie: true });
+const parseForm = bodyParser.urlencoded({ extended: false });
+router.use(cookieParser());
+
+router.get("/", function (request, response) {
+  db.getAllFaqs(function (error, faq) {
+    if (error) {
+      const model = {
+        error: ["Database error, please try again later!"],
+        faq: [],
+      };
+      response.render("faq/faq.hbs", model);
+    } else {
+      const model = {
+        faq,
+      };
+      //console.log(faq)
+      response.render("faq/faq.hbs", model);
+    }
+  });
+});
 
 // ASK A QUESTION //
-router.get('/ask', function(request, response){
-    response.render('faq/ask_faq_question.hbs')
-})
+router.get("/ask", csrfProtection, function (request, response) {
+  const model = {
+    csrfToken: request.csrfToken(),
+  };
+  response.render("faq/ask_faq_question.hbs", model);
+});
 
-router.post('/ask', function(request, response){
+router.post("/ask", parseForm, csrfProtection, function (request, response) {
+  const name = request.body.name;
+  const question = request.body.question;
+  const currentTime = helpers.getCurrentTime();
+  const errors = helpers.validateFaq(name, question);
 
-    const name = request.body.name
-    const question = request.body.question
-
-    // TODO VALIDATION OF INPUTED TEXT
-    //const errors = validators.getValidationErrorsForProduct(title, textBody)
-    let errors = []
-
-
-    if(errors.length === 0){
-        db.createFaqQuestion(name, question, function(error, faqId){
-            if(error){
-                errors.push("Internal server error.")
-                console.log(error)
-                const model = {
-                    errors,
-                    name,
-                    question
-                }
-                response.render('faq/ask_faq_question.hbs', model)
-            }else{
-                response.redirect('/faqs/')
-            }
-        })
-    }else{
+  if (errors.length === 0) {
+    db.createFaqQuestion(name, question, currentTime, function (error, faqId) {
+      if (error) {
+        errors.push("Internal server error.");
+        console.log(error);
         const model = {
-            errors,
-            name,
-            question
-        }
-        response.render('faq/ask_faq_question.hbs', model)
-    }
-})
+          errors,
+          name,
+          question,
+        };
+        response.render("faq/ask_faq_question.hbs", model);
+      } else {
+        response.redirect("/faqs/");
+      }
+    });
+  } else {
+    const model = {
+      errors,
+      name,
+      question,
+    };
+    response.render("faq/ask_faq_question.hbs", model);
+  }
+});
 
 // RESPOND TO A QUESTION //
-router.get('/:id/respond', function(request, response){
-    const question = request.body.question
-    const id = request.params.id
-    const model = {
+router.get("/:id/respond", csrfProtection, function (request, response) {
+  const question = request.body.question;
+  const id = request.params.id;
+  const model = {
+    question,
+    id,
+    csrfToken: request.csrfToken(),
+  };
+  response.render("faq/respond_faq_question.hbs", model);
+});
+
+router.post(
+  "/:id/respond",
+  parseForm,
+  csrfProtection,
+  function (request, response) {
+    const questionResponse = request.body.questionResponse;
+    const id = request.params.id;
+    const responseTime = helpers.getCurrentTime();
+    const errors = helpers.validateFaq("AAAAAAAAA", questionResponse);
+
+    if (!request.session.isLoggedIn) {
+      errors.push("Not logged in.");
+    }
+
+    const originalQuestion = db.getFaqsById(id, function (error) {
+      errors.concat(error);
+      if (errors.length === 0) {
+        db.answerFAQ(id, questionResponse, responseTime, function (error) {
+          if (error) {
+            errors.push("Internal server error.");
+            //TODO REMOVE
+            console.log(error);
+            const model = {
+              errors,
+              id,
+              originalQuestion,
+            };
+            response.render("faq/respond_faq_question.hbs", model);
+          } else {
+            response.redirect("/faqs");
+          }
+        });
+      } else {
+        const model = {
+          errors,
+          originalQuestion,
+        };
+        response.render("faq/ask_faq_question.hbs", model);
+      }
+    });
+  }
+);
+
+router.get("/:id", function (request, response) {
+  const id = request.params.id;
+  db.getFaqsById(
+    id,
+    function (error, name, question, questionResponse, id, date) {
+      let errors = [];
+      if (error) {
+        errors.push("Internal server error.");
+        const model = {
+          errors,
+          name,
+          question,
+          questionResponse,
+          id,
+          date,
+        };
+        response.render("faq/faq.hbs", model);
+      } else {
+        const model = {
+          name,
+          question,
+          questionResponse,
+          id,
+          date,
+        };
+        response.render("faq/faq.hbs", model);
+      }
+    }
+  );
+});
+
+router.get("/:id/delete", csrfProtection, function (request, response) {
+  const id = request.params.id;
+  db.getFaqsById(id, function (error, faq) {
+    let errors = []; //TODO find a way to use const over let
+    if (error) {
+      errors.push("Internal server error.");
+      const model = {
+        errors,
+        faq,
+      };
+      response.render("faq/delete_faq.hbs", model);
+    } else {
+      const model = {
+        faq,
+        csrfToken: request.csrfToken(),
+      };
+      response.render("faq/delete_faq.hbs", model);
+    }
+  });
+});
+
+router.post(
+  "/:id/delete",
+  parseForm,
+  csrfProtection,
+  function (request, response) {
+    const id = request.params.id;
+    db.deleteFaq(id, function (error) {
+      let errors = [];
+      if (error) {
+        errors.push("Internal server error.");
+        const model = {
+          errors,
+          faq,
+        };
+        response.render("faq/delete_faq.hbs", model);
+      } else {
+        response.redirect("/faqs");
+      }
+    });
+
+    db.getFaqsById(id, function (error, name, question, questionResponse, id) {
+      const model = {
+        name,
         question,
-        id
-    }
-    response.render('faq/respond_faq_question.hbs', model)
-})
+        questionResponse,
+        id,
+      };
+      response.render("faq/delete_faq.hbs", model);
+    });
+  }
+);
 
-router.post('/:id/respond', function(request, response){
-
-    // TODO VALIDATIONS WHEN SUBMITTING A QUESTION
-    const questionResponse = request.body.questionResponse
-    const id = request.params.id
-    console.log(id)
-    // TODO VALIDATION OF INPUTED TEXT
-    //const errors = validators.getValidationErrorsForProduct(title, textBody)
-
-    let errors = []
-
-    if(!request.session.isLoggedIn){
-        errors.push("Not logged in.")
-    }
-
-    const originalQuestion = db.getFaqsById(id, function (error){
-        errors.concat(error)
-        if(errors.length === 0){
-            db.answerFAQ(id, questionResponse, function(error){
-                if(error){
-                    errors.push("Internal server error.")
-                    console.log(error)
-                    const model = {
-                        errors,
-                        id,
-                        originalQuestion
-                    }
-                    response.render('faq/respond_faq_question.hbs', model)
-                }else{
-                    response.redirect('/faqs')
-                }
-            })
-        }else{
-            const model = {
-                errors,
-                originalQuestion
-            }
-            response.render('faq/ask_faq_question.hbs', model)
-        }
-    })
-
-
-})
-
-/*
-router.post('/ask', function(request, response){
-
-    // TODO VALIDATIONS WHEN SUBMITTING A QUESTION
-    const name = request.body.name
-    const question = request.body.question
-
-    // TODO VALIDATION OF INPUTED TEXT
-    //const errors = validators.getValidationErrorsForProduct(title, textBody)
-    let errors = []
-    if(!request.session.isLoggedIn){
-        errors.push("Not logged in.")
-    }
-
-    if(errors.length === 0){
-        db.createFaqQuestion(name, question, function(error, faqId){
-            if(error){
-                errors.push("Internal server error.")
-                console.log(error)
-                const model = {
-                    errors,
-                    name,
-                    question
-                }
-                response.render('faq/ask_faq_question.hbs', model)
-            }else{
-                response.redirect('/faqs/')
-            }
-        })
-    }else{
-        const model = {
-            errors,
-            name,
-            question
-        }
-        response.render('faq/ask_faq_question.hbs', model)
-    }
-})
-*/
-
-router.get('/:id', function(request, response){
-
-    const id = request.params.id
-
-    db.getFaqsById(id, function(error, name, question, questionResponse, id) {
-        let errors = []
-        //TODO ADD MISSING ERRORS
-        if(error){
-            errors.push("Internal server error.")
-            const model = {
-                errors,
-                name,
-                question,
-                questionResponse,
-                id
-            }
-            response.render('faq/faq.hbs', model)
-        }else{
-            const model = {
-                name,
-                question,
-                questionResponse,
-                id
-            }
-            response.render('faq/faq.hbs', model)
-        }
-    })
-})
-
-router.get('/:id/delete', function(request, response){
-
-    const id = request.params.id
-
-    db.getFaqsById(id, function(error, faq){
-
-        let errors = []
-        if(error){
-            errors.push("Internal server error.")
-            const model = {
-                errors,
-                faq
-                }
-            response.render('faq/delete_faq.hbs', model)
-        }else{
-            const model = {
-                faq
-            }
-            response.render('faq/delete_faq.hbs', model)
-            }
-    })
-
-})
-
-router.post('/:id/delete', function(request, response){
-
-    const id = request.params.id
-    db.deleteFaq(id, function(error){
-
-        // TODO: Handle error.
-
-        response.redirect('/faqs')
-
-    })
-
-    db.getFaqsById(id, function(error, name, question, questionResponse, id) {
-        // TODO: Handle error.
-        //console.log(error)
-        const model = {
-            name,
-            question,
-            questionResponse,
-            id
-        }
-        response.render('faq/delete_faq.hbs', model)
-    })
-})
-
-
-
-module.exports = router
+module.exports = router;
