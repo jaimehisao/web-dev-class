@@ -4,16 +4,19 @@
     {{#if faq.length}}
         <ul>
             {{#each faq}}
-                <div class="card" style="width: auto">
+                <div class="card" id="cards">
                     <div class="container">
                         <h5 class="card-title">{{name}}</h5>
                         <h6 class="card-text">{{question}}</h6>
-                        <h4 class="card-text">{{response}}</h4>
+                        <p class="card-text">{{answer}}</p>
+                        <p class="card-text greyedOut">Created at: {{dateOfQuestion}}</p>
+                        <p class="card-text greyedOut">Responded at: {{dateOfResponse}}</p>
                         <br>
                         <a href="/faqs/{{id}}/respond">Respond</a>
                         <a href="/faqs/{{id}}/delete">Delete</a>
                     </div>
                 </div>
+                <br>
             {{/each}}
         </ul>
     {{else}}
@@ -23,7 +26,7 @@
     {{#if faq.length}}
         <ul>
             {{#each faq}}
-                <div class="card" style="width: auto">
+                <div class="card" id="cards">
                     <div class="container">
                         <h5 class="card-title">{{name}}</h5>
                         <h6 class="card-text">{{question}}</h6>
@@ -31,6 +34,7 @@
                         <br>
                     </div>
                 </div>
+                <br>
             {{/each}}
         </ul>
     {{else}}

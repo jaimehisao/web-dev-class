@@ -11,6 +11,7 @@
 {{/if}}
 
 <form action="/blog/{{id}}/update" method="POST">
+    <input type="hidden" name="_csrf" value="{{csrfToken}}">
     <div>
         <label for="comment">Update Title:</label>
         <textarea name="title" class="form-control">{{text}}</textarea><br>

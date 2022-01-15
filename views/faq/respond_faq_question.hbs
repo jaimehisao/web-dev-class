@@ -12,6 +12,7 @@
 {{/if}}
 
 <form action="/faqs/{{id}}/respond" method="POST">
+    <input type="hidden" name="_csrf" value="{{csrfToken}}">
     <div>
         <p>Original Question</p>
         <p>{{question}}</p>

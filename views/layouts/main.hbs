@@ -2,24 +2,18 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-
-    <!--
-    <link rel="stylesheet"
-          href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
-          integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu"
-          crossorigin="anonymous">
-    -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hisao's Page</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link rel="stylesheet" href="/css/layout.css">
 </head>
 
 <body>
-
 <nav class="navbar navbar-expand-lg navbar-light bg-light d-flex p-2">
     <a class="navbar-brand" href="#">Hisao's Page</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
+            aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarNav">
@@ -42,10 +36,12 @@
             </li>
             {{#if session.isLoggedIn}}
                 <li class="nav-item active">
-                    <a class="nav-item nav-link" href="/auth/logout">Logout</a>
+                    <a class="nav-item nav-link" id="loginButtons" href="/auth/logout">Logout</a>
                 </li>
             {{else}}
-                <li><a href="/auth/login">Login</a></li>
+                <li>
+                    <a class="nav-item nav-link" id="loginButtons" href="/auth/login">Login</a>
+                </li>
             {{/if}}
         </div>
         </ul>
@@ -60,44 +56,3 @@
 </footer>
 </body>
 </html>
-<!--
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" href="#">Hisao</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="true" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav">
-            <li class="nav-item active">
-                <a class="nav-link" href="/faq">FAQ <span class="sr-only">(current)</span></a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/blog">Blog</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/about">About</a>
-            </li>
-            {{#if session.isLoggedIn}}
-            <li class="nav-item">
-                <a class="nav-link disabled" href="/login">Login</a>
-            </li>
-            {{else}}
-            <li class="nav-item">
-                <a class="nav-link disabled" href="/login">Login</a>
-            </li>
-            {{/if}}
-        </ul>
-    </div>
-</nav>
-
-
-
-<main>
-    {{{body}}}
-</main>
-<footer>
-    <p>Copyright Jaime Hisao Yesaki Hinojosa - 2021</p>
-</footer>
-</body>
-</html>
--->

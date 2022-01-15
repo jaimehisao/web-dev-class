@@ -1,20 +1,18 @@
 <h2>Hisao's Reviews</h2>
-
 {{#if hasDatabaseError}}
     <div class="alert alert-primary" role="alert">
         Couldn't fetch the blog posts at the moment, try again later.
     </div>
 {{else}}
 <a href="/reviews/create" class="btn btn-primary">Submit a Review</a>
-
 {{#if session.isLoggedIn}}
 {{#if reviews.length}}
     <ul>
         {{#each reviews}}
-            <div class="card" style="width: auto">
+            <div class="card" id="cards">
                 <div class="container">
                     <h3 class="card-title">{{title}}</h3>
-                    <p class="card-text">Score {{score}} out of 5</p>
+                    <p class="card-text">Score {{starRating}} out of 5</p>
                     <p class="card-text">Written by: {{author}}</p>
                     <p class="card-text">{{review}}</p>
                     <a href="/reviews/{{id}}/delete">Delete</a>
@@ -29,15 +27,16 @@
     {{#if reviews.length}}
         <ul>
             {{#each reviews}}
-                <div class="card" style="width: auto">
+                <div class="card" id="cards">
                     <div class="container">
                         <h3 class="card-title">{{title}}</h3>
-                        <p class="card-text">Score {{score}} out of 5</p>
+                        <p class="card-text">Score {{starRating}} out of 5</p>
                         <p class="card-text">Written by: {{author}}</p>
                         <p class="card-text">{{review}}</p>
                         <br>
                     </div>
                 </div>
+                <br>
             {{/each}}
         </ul>
     {{else}}

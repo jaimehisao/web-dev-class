@@ -14,13 +14,14 @@
                     <div class="card" style="width: auto">
                         <div class="card-body">
                             <h4 class="card-title">{{title}}</h4>
-                            <p class="card-text greyedOut">Created at: {{date}}</p>
+                            <p class="card-text greyedOut">Created at: {{dateCreated}}</p>
                             <p class="card-text">{{textEntry}}</p>
                             <br>
                             <a href="/blog/{{id}}/update">Update</a>
                             <a href="/blog/{{id}}/delete">Delete</a>
                         </div>
                     </div>
+                    <br>
                 {{/each}}
             </ul>
         {{else}}
@@ -33,10 +34,11 @@
                     <div class="card" style="width: auto;">
                         <div class="card-body">
                             <h4 class="card-title">{{title}}</h4>
-                            <h6 class="card-title">Created at: {{date}}</h6>
+                            <h6 class="card-title">Created at: {{dateCreated}}</h6>
                             <p class="card-text">{{textEntry}}</p>
                         </div>
                     </div>
+                    <br>
                 {{/each}}
             </ul>
         {{else}}

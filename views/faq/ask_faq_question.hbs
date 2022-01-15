@@ -1,9 +1,7 @@
 <h1>Ask questions</h1>
-
-
 {{#if errors.length}}
     <div class="alert alert-primary" role="alert">
-        Couldn't fetch the FAQs posts at the moment, try again later.
+        Internal error when posting your question, please try again later.
     <p>Couldn't add a question due to:</p>
     <ul>
         {{#each errors}}
@@ -14,6 +12,7 @@
 {{/if}}
 
 <form action="/faqs/ask" method="POST">
+    <input type="hidden" name="_csrf" value="{{csrfToken}}">
     <div>
         Your Name: <input type="text" name="name" class="form-control">
     </div>
@@ -21,6 +20,8 @@
         Question to ask:<br>
         <textarea name="question" class="form-control"></textarea>
     </div>
+    <br>
+    <!-- TODO MArgin from the sides-->
     <div>
         <input type="submit" value="Submit" class="btn btn-primary">
     </div>

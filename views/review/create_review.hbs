@@ -15,6 +15,7 @@ references about him and his work.
 {{/if}}
 
 <form action="/reviews/create" method="POST">
+    <input type="hidden" name="_csrf" value="{{csrfToken}}">
     <div>
         Review Title:
         <input type="text" name="title" class="form-control">
@@ -25,7 +26,7 @@ references about him and his work.
     </div>
     <br>
     <div>
-        Score:
+        Star Rating (1 worse - 5 best):
         <select name = "score">
             <option value = "1" selected>1</option>
             <option value = "2">2</option>

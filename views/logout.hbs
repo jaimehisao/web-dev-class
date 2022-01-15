@@ -1,5 +1,6 @@
 <h1>Logout Confirmation</h1>
 <form action="/auth/logout" method="POST">
+    <input type="hidden" name="_csrf" value="{{csrfToken}}">
     <div>
         Are you sure you want to log out?
     </div>

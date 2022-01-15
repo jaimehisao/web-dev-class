@@ -13,13 +13,14 @@
 {{/if}}
 
 <form action="/blog/create" method="POST">
+    <input type="hidden" name="_csrf" value="{{csrfToken}}">
     <div>
-        Name:
+        Title:
         <input type="text" name="title" class="form-control">
     </div>
 
     <div>
-        Description:<br>
+        Post:<br>
         <textarea name="textBody" class="form-control"></textarea>
     </div>
 
