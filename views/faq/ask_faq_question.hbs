@@ -14,11 +14,11 @@
 <form action="/faqs/ask" method="POST">
     <input type="hidden" name="_csrf" value="{{csrfToken}}">
     <div>
-        Your Name: <input type="text" name="name" class="form-control">
+        Your Name: <input type="text" name="name" class="form-control" value="{{name}}">
     </div>
     <div>
         Question to ask:<br>
-        <textarea name="question" class="form-control"></textarea>
+        <textarea name="question" class="form-control">{{question}}</textarea>
     </div>
     <br>
     <div>

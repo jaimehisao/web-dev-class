@@ -18,11 +18,11 @@ references about him and his work.
     <input type="hidden" name="_csrf" value="{{csrfToken}}">
     <div>
         Review Title:
-        <input type="text" name="title" class="form-control">
+        <input type="text" name="title" class="form-control" value="{{title}}">
     </div>
     <div>
         Posted by:
-        <input type="text" name="postedBy" class="form-control">
+        <input type="text" name="postedBy" class="form-control" value="{{author}}">
     </div>
     <br>
     <div>
@@ -37,7 +37,7 @@ references about him and his work.
     </div>
     <div>
         Review Text:<br>
-        <textarea name="review" class="form-control"></textarea>
+        <textarea name="review" class="form-control">{{textBody}}</textarea>
     </div>
 
     <div>

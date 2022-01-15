@@ -14,10 +14,11 @@
     <input type="hidden" name="_csrf" value="{{csrfToken}}">
     <div>
         <label for="comment">Update Title:</label>
-        <textarea name="title" class="form-control">{{text}}</textarea><br>
+        <textarea name="title" class="form-control">{{blogPost.title}}</textarea><br>
         <label for="comment">Update post:</label>
-        <textarea name="textEntry" rows="3" class="form-control" >{{text}}</textarea>
+        <textarea name="textEntry" rows="3" class="form-control" >{{blogPost.textEntry}}</textarea>
     </div>
+    <br>
     <div>
         <input type="submit" value="Update" class="btn btn-primary">
     </div>
