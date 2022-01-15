@@ -127,7 +127,6 @@ exports.createReview = function (author, title, review, score, date, callback) {
     "INSERT INTO reviews (title, author, review, starRating, dateCreated) VALUES (?, ?, ?, ?, ?)";
   const values = [title, author, review, score, date];
   db.run(query, values, function (error) {
-    //console.log(error)
     callback(error, this.lastID);
   });
 };
