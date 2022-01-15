@@ -2,3 +2,8 @@
 node_modules/
 *.db
 *.sql
+package.json
+.DS_Store
+.eslintrc.yml
+package-lock.json
+*.DS_Store
