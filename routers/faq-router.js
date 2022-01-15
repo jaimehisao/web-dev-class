@@ -100,8 +100,6 @@ router.post(
         db.answerFAQ(id, questionResponse, responseTime, function (error) {
           if (error) {
             errors.push("Internal server error.");
-            //TODO REMOVE
-            console.log(error);
             const model = {
               errors,
               id,
@@ -157,7 +155,7 @@ router.get("/:id", function (request, response) {
 router.get("/:id/delete", csrfProtection, function (request, response) {
   const id = request.params.id;
   db.getFaqsById(id, function (error, faq) {
-    let errors = []; //TODO find a way to use const over let
+    let errors = [];
     if (error) {
       errors.push("Internal server error.");
       const model = {

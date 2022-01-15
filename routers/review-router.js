@@ -54,9 +54,8 @@ router.post("/create", parseForm, csrfProtection, function (request, response) {
       dateTime,
       function (error, review) {
         if (error) {
-          //TODO CHECK THIS LOGIC
           errors.push("Internal server error.");
-          console.log(error);
+          errors.push(error);
           const model = {
             errors,
             author,

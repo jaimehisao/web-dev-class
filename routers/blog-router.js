@@ -120,8 +120,7 @@ router.post(
 
     if (errors.length === 0) {
       db.updateBlogPostById(id, title, textEntry, function (error) {
-        //TODO console.log(error)
-        //TODO console.log('ERROR WHEN UDPATING BLOG')
+        errors.push(error);
         response.redirect("/blog/");
       });
     } else {
