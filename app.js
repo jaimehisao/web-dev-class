@@ -6,16 +6,17 @@ const expressHandlebars = require("express-handlebars");
 const expressSession = require("express-session");
 
 // DECLARATION OF EXTERNAL ROUTERS//
-const blogRouter = require("./routers/blog-router");
-const authRouter = require("./routers/auth-router");
-const faqRouter = require("./routers/faq-router");
-const reviewRouter = require("./routers/review-router");
+const blogRouter = require("./routers/blog_router");
+const authRouter = require("./routers/auth_router");
+const faqRouter = require("./routers/faq_router");
+const reviewRouter = require("./routers/review_router");
 
 // DATABASE DECLARATIONS SQLITE //
 const connectSqlite3 = require("connect-sqlite3");
 const SQLiteStore = connectSqlite3(expressSession);
 database.runInitializing();
 
+// App declaration
 const app = express();
 app.use(express.static("static"));
 
@@ -26,6 +27,7 @@ app.use(
   })
 );
 
+// Sessions Store
 app.use(
   expressSession({
     store: new SQLiteStore({ db: "sessions.db" }),
@@ -35,8 +37,8 @@ app.use(
   })
 );
 
+// Make the session available to all views.
 app.use(function (request, response, next) {
-  // Make the session available to all views.
   response.locals.session = request.session;
   next();
 });
@@ -54,16 +56,19 @@ app.engine(
   })
 );
 
+// Start Page
 app.get("/", function (request, response) {
   response.render("start.hbs");
 });
 
+// About Page
 app.get("/about", function (request, response) {
   response.render("about.hbs");
 });
 
-app.get("*", function (req, res) {
-  res.status(404).send("Huh? Not found! Try Again!");
+// Default Route for Not Found Resources
+app.get("*", function (request, response) {
+  response.render("errors/page_not_found.hbs");
 });
 
 app.listen(8080);
