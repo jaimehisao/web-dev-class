@@ -15,15 +15,13 @@
 <form action="/blog/create" method="POST">
     <input type="hidden" name="_csrf" value="{{csrfToken}}">
     <div>
-        Title:
+        <label for="title">Title:</label>
         <input type="text" name="title" class="form-control" value="{{title}}">
     </div>
-
     <div>
-        Post:<br>
+        <label for="textBody">Post:</label>
         <textarea name="textBody" class="form-control">{{textBody}}</textarea>
     </div>
-
     <div>
         <input type="submit" value="Create" class="btn btn-primary">
     </div>

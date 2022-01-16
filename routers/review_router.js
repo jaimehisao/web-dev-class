@@ -44,7 +44,11 @@ router.post("/create", parseForm, csrfProtection, function (request, response) {
   const score = request.body.score;
   const csrfToken = request.body.csrfToken;
   const dateTime = helpers.getCurrentTime();
-  const errors = helpers.validateReview(title, textBody);
+  const errors = [
+    helpers.validateTitle(title),
+    helpers.validateText(author),
+    helpers.validateText(textBody),
+  ];
 
   if (errors.length === 0) {
     db.createReview(

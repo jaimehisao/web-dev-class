@@ -41,7 +41,7 @@ router.post("/create", csrfProtection, parseForm, function (request, response) {
   const title = request.body.title;
   const textBody = request.body.textBody;
   const currentTime = helpers.getCurrentTime();
-  const errors = helpers.validateBlogPost(title, textBody);
+  const errors = [helpers.validateTitle(title), helpers.validateText(textBody)];
 
   if (!request.session.isLoggedIn) {
     errors.push("Not logged in.");
@@ -109,10 +109,10 @@ router.post(
     const id = request.params.id;
     const title = request.body.title;
     const textEntry = request.body.textEntry;
-
-    // ERRORS //
-    const errors = [];
-    //const errors = validators.getValidationErrorsForProduct(title, textEntry)
+    const errors = [
+      helpers.validateTitle(title),
+      helpers.validateText(textEntry),
+    ];
 
     // VERIFY IF USER IS LOGGED IN //
     if (!request.session.isLoggedIn) {
@@ -182,5 +182,3 @@ router.post(
 );
 
 module.exports = router;
-
-//TODO Make sure data is still there when a user makes a mistake when writing a form

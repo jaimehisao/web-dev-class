@@ -11,12 +11,10 @@
                         <p class="card-text">{{answer}}</p>
                         <p class="card-text greyedOut">Created at: {{dateOfQuestion}}</p>
                         <p class="card-text greyedOut">Responded at: {{dateOfResponse}}</p>
-                        <br>
                         <a href="/faqs/{{id}}/respond">Respond</a>
                         <a href="/faqs/{{id}}/delete">Delete</a>
                     </div>
                 </div>
-                <br>
             {{/each}}
         </ul>
     {{else}}
@@ -31,10 +29,8 @@
                         <h5 class="card-title">{{name}}</h5>
                         <h6 class="card-text">{{question}}</h6>
                         <h4 class="card-text">{{questionResponse}}</h4>
-                        <br>
                     </div>
                 </div>
-                <br>
             {{/each}}
         </ul>
     {{else}}

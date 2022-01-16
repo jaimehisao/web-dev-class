@@ -11,7 +11,7 @@
         {{#if blog.length}}
             <ul>
                 {{#each blog}}
-                    <div class="card" style="width: auto">
+                    <div class="card" id="cards">
                         <div class="card-body">
                             <h4 class="card-title">{{title}}</h4>
                             <p class="card-text greyedOut">Created at: {{dateCreated}}</p>
@@ -31,7 +31,7 @@
         {{#if blog.length}}
             <ul>
                 {{#each blog}}
-                    <div class="card" style="width: auto;">
+                    <div class="card" id="cards">
                         <div class="card-body">
                             <h4 class="card-title">{{title}}</h4>
                             <h6 class="card-title">Created at: {{dateCreated}}</h6>
@@ -46,5 +46,3 @@
         {{/if}}
     {{/if}}
 {{/if}}
-
-

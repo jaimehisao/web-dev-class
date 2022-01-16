@@ -41,13 +41,12 @@ router.post("/ask", parseForm, csrfProtection, function (request, response) {
   const name = request.body.name;
   const question = request.body.question;
   const currentTime = helpers.getCurrentTime();
-  const errors = helpers.validateFaq(name, question);
+  const errors = [helpers.validateTitle(name), helpers.validateText(question)];
 
   if (errors.length === 0) {
     db.createFaqQuestion(name, question, currentTime, function (error, faqId) {
       if (error) {
         errors.push("Internal server error.");
-        console.log(error);
         const model = {
           errors,
           name,
@@ -88,7 +87,7 @@ router.post(
     const questionResponse = request.body.questionResponse;
     const id = request.params.id;
     const responseTime = helpers.getCurrentTime();
-    const errors = helpers.validateFaq("AAAAAAAAA", questionResponse);
+    const errors = [helpers.validateText(questionResponse)];
 
     if (!request.session.isLoggedIn) {
       errors.push("Not logged in.");
