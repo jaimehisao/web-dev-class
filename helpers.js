@@ -1,104 +1,44 @@
-const MIN_LENGTH_BLOG_TITLE = 3
-const MIN_TEXT_LENGTH_TEXT_BLOG = 5
-const MAX_LENGTH_BLOG_TITLE = 50
-const MAX_TEXT_LENGTH_TEXT_BLOG = 5000
+const MIN_TEXT_LENGTH = 4;
+const MAX_TEXT_LENGTH_TITLE = 50;
+const MAX_TEXT_LENGTH = 5000;
 
-exports.validateBlogPost = function(title, text){
-    let errors = []
-    const errors1 = validateTextIsntTooLong(text)
-    if(errors1.length !== 0){
-        errors.push(errors1[0])
-    }
-    const errors2 = validateTextIsntShort(text)
-    if(errors2.length !== 0){
-        errors.push(errors2[0])
-    }
-    const errors3 = validateTextIsntTooLong(title)
-    if(errors3.length !== 0){
-        errors.push(errors3[0])
-    }
-    const errors4 = validateTextIsntShort(title)
-    if(errors4.length !== 0){
-        errors.push(errors4[0])
-    }
-    return errors
-}
+// Function to validate that title is not empty, too short or too long.
+exports.validateTitle = function (text) {
+  if (!text) {
+    return "Title is missing.";
+  } else if (text.length < MIN_TEXT_LENGTH) {
+    return "Title is too short, minimum 4 characters.";
+  } else if (text.length > MAX_TEXT_LENGTH_TITLE) {
+    return "Title is too long, maximum 50 characters.";
+  }
+};
 
-exports.validateFaq = function(title, question){
-    let errors = []
-    const errors1 = validateTextIsntTooLong(question)
-    if(errors1.length !== 0){
-        errors.push(errors1[0])
-    }
-    const errors2 = validateTextIsntShort(question)
-    if(errors2.length !== 0){
-        errors.push(errors2[0])
-    }
-    const errors3 = validateTextIsntTooLong(title)
-    if(errors3.length !== 0){
-        errors.push(errors3[0])
-    }
-    const errors4 = validateTextIsntShort(title)
-    if(errors4.length !== 0){
-        errors.push(errors4[0])
-    }
-    return errors
-}
+// Function to validate that text is not empty, too short or too long.
+exports.validateText = function (text) {
+  if (!text) {
+    return "Text entry is missing.";
+  } else if (text.length < MIN_TEXT_LENGTH) {
+    return "Text entry is too short, minimum 4 characters.";
+  } else if (text.length > MAX_TEXT_LENGTH) {
+    return "Text entry is too long, maximum 5000 characters.";
+  }
+};
 
-exports.validateReview = function(title, question, name){
-    let errors = []
-    const errors1 = validateTextIsntTooLong(question)
-    if(errors1.length !== 0){
-        errors.push(errors1[0])
-    }
-    const errors2 = validateTextIsntShort(question)
-    if(errors2.length !== 0){
-        errors.push(errors2[0])
-    }
-    const errors3 = validateTextIsntTooLong(title)
-    if(errors3.length !== 0){
-        errors.push(errors3[0])
-    }
-    const errors4 = validateTextIsntShort(title)
-    if(errors4.length !== 0){
-        errors.push(errors4[0])
-    }
-    const errors5 = validateTextIsntTooLong(name)
-    if(errors3.length !== 0){
-        errors.push(errors5[0])
-    }
-    const errors6 = validateTextIsntShort(name)
-    if(errors4.length !== 0){
-        errors.push(errors6[0])
-    }
-    return errors
-}
+//TODO GUI FOR MOBILE
 
-exports.getCurrentTime = function(){
-    let today = new Date();
-    let date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
-    let time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
-    let dateTime = date + ' ' + time;
-    return dateTime
-}
+//TODO MAYBE CHANGE APP NAME
 
-validateTextIsntTooLong = function (text){
-    const validationErrors = []
-    if (!text){
-        validationErrors.push("Text is missing.")
+//TODO DISPLAY TREE OUTPUT as text
 
-    }else if(text.length > MAX_TEXT_LENGTH_TEXT_BLOG){
-        validationErrors.push("Text is too long, maximum 5000 characters.")
-    }
-    return validationErrors
-}
+//TODO LINK UP RESOURCES
 
-validateTextIsntShort = function (text){
-    const validationErrors = []
-    if(!text){
-        validationErrors.push("Text is missing.")
-    }else if(text.length < MIN_TEXT_LENGTH_TEXT_BLOG){
-        validationErrors.push("Text is too short, minimum 5 characters.")
-    }
-    return validationErrors
-}
+// Function to facilitate the retrieval of current time
+exports.getCurrentTime = function () {
+  let today = new Date();
+  let date =
+    today.getFullYear() + "-" + (today.getMonth() + 1) + "-" + today.getDate();
+  let time =
+    today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+  let dateTime = date + " " + time;
+  return dateTime;
+};
