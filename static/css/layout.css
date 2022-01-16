@@ -64,11 +64,6 @@ footer {
 	/*border-top: 3px solid black; */
 }
 
-
-/*
-* BOOTSTRAP
- */
-
 .card {
 	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
 	transition: 0.3s;
@@ -77,16 +72,12 @@ footer {
 	width: 150%;
 }
 
-
 /* Deeper shadow on mouse over */
-
 .card:hover {
 	box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
 }
 
-
 /* Card Containers */
-
 .container {
 	padding: 2px 16px;
 }
@@ -99,8 +90,7 @@ img {
 	margin: 25px 25px 150px 25px;
 }
 
-/*About.hbs*/
-
+/* About.hbs */
 #aboutDiv2 {
 	width: 30%;
 	float: right;
@@ -136,4 +126,8 @@ img {
 #nav ul {
 	display: inline-block;
 	list-style-type: none;
+}
+
+#cards {
+	width: auto;
 }
