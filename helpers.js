@@ -24,14 +24,6 @@ exports.validateText = function (text) {
   }
 };
 
-//TODO GUI FOR MOBILE
-
-//TODO MAYBE CHANGE APP NAME
-
-//TODO DISPLAY TREE OUTPUT as text
-
-//TODO LINK UP RESOURCES
-
 // Function to facilitate the retrieval of current time
 exports.getCurrentTime = function () {
   let today = new Date();
